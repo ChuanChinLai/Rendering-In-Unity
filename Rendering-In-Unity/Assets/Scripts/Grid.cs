@@ -6,7 +6,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     public int m_xSize = 0;
-    public int m_ySixe = 0;
+    public int m_ySize = 0;
 
     private Mesh m_mesh;
     private Vector3[] m_vertices;
@@ -22,18 +22,18 @@ public class Grid : MonoBehaviour
         GetComponent<MeshFilter>().mesh = m_mesh = new Mesh();
         m_mesh.name = "Procedural Grid";
 
-        m_vertices = new Vector3[(m_xSize + 1) * (m_ySixe + 1)];
+        m_vertices = new Vector3[(m_xSize + 1) * (m_ySize + 1)];
         Vector2[] uv = new Vector2[m_vertices.Length];
 
         Vector4[] tangents = new Vector4[m_vertices.Length];
         Vector4 tangent = new Vector4(1f, 0f, 0f, -1f);
 
-        for (int i = 0, y = 0; y <= m_ySixe; y++)
+        for (int i = 0, y = 0; y <= m_ySize; y++)
         {
             for (int x = 0; x <= m_xSize; x++, i++)
             {
                 m_vertices[i] = new Vector3(x, y);
-                uv[i] = new Vector2((float)x / m_xSize, (float)y / m_ySixe);
+                uv[i] = new Vector2((float)x / m_xSize, (float)y / m_ySize);
                 tangents[i] = tangent;
             }
         }
@@ -42,9 +42,9 @@ public class Grid : MonoBehaviour
         m_mesh.uv = uv;
         m_mesh.tangents = tangents;
 
-        int[] triangles = new int[m_xSize * m_ySixe * 6];
+        int[] triangles = new int[m_xSize * m_ySize * 6];
 
-        for (int ti = 0, vi = 0, y = 0; y < m_ySixe; y++, vi++)
+        for (int ti = 0, vi = 0, y = 0; y < m_ySize; y++, vi++)
         {
             for (int x = 0; x < m_xSize; x++, ti += 6, vi++)
             {
